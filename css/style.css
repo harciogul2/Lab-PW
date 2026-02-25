@@ -81,3 +81,16 @@ button {
     border: none;
 }
 
+#salut {
+    text-align: center; 
+    background-color: #0c4885;
+    color: white;
+    margin: 20px auto;  
+    padding: 15px;      
+    width: fit-content; 
+    max-width: 80%;     
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+    transition: all 0.5s ease; 
+}
