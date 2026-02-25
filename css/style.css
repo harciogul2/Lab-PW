@@ -1,0 +1,83 @@
+/* Recapitulare CSS */
+:root {
+    --primary-color: #0c4885;
+    --secondary-color: #d6dfdb;
+    --background-color: #d6dfdb;
+    --text-color: #333;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    max-width: 80%;
+    margin: 0 auto;
+    line-height: 1.6;
+    pasdding: 20px;
+}
+
+/* Imagine de profil */
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    object-fit: cover;
+}
+
+/* Navigare */
+nav ul {
+    list-style: none;
+    background: var(--primary-color);
+    padding: 10px;
+    text-align: center;
+    border-radius: 45%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    background: var(--secondary-color);
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+nav ul li a:hover {
+    background: #2980b9;
+}
+
+ /*Formular*/
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+}
+
+input, textarea, button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background: var(--primary-color);
+    color:  var(--secondary-color);
+    cursor: pointer;
+    border: none;
+}
+

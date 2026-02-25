@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prezentare Personală - Student</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Iaru Briana Maria</h1>
+        <p>Studenta la Facultatea de Inginerie Electrica si Stiinta Calculatoarelor, Specializarea Calculatoare, Anul II</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">Despre</a></li>
+            <li><a href="#education">Educație</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="about">
+            <h2>Despre mine</h2>
+            <img src="images/profil.png" alt="Poza de profil a Brianei" loading="lazy" width="100" class="profile-img">
+            <p>Sunt un pasionata de tehnologie și motorsport, dornica să învăț cele mai noi standarde în domeniu.</p>
+        </section>
+
+        <section id="education">
+            <h2>Educație</h2>
+            <ol>
+                <li>Colegiul National Dinicu Golescu (2020-2024)</li>
+                <li>Universitatea Transilvania-Iesc(2024-Prezent)</li>
+            </ol>
+        </section>
+    </main>
+
+    <aside>
+        <h3>Hobby-uri & Citate</h3>
+        <p><em>"Codul este ca umorul. Dacă trebuie să îl explici, e prost."</em> - Cory House</p>
+        <ul>
+            <li>Calatorit</li>
+            <li>Șah</li>
+        </ul>
+    </aside>
+
+    <footer id="contact">
+        <h3>Contactează-mă</h3>
+        <form id="contactForm">
+            <label for="name">Nume:</label>
+            <input type="text" id="name" autocomplete="name">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" autocomplete="email" required>
+
+            <label for="message">Mesaj:</label>
+            <textarea id="message" required minlength="10"></textarea>
+
+            <button type="submit" onclick="submitForm()">Trimite</button>
+        </form>
+        <p>&copy; 2026 Laborator Programare Web.</p>
+    </footer>
+
+   
+
+ <script>
+        alert("Hello World!");
+    </script>
+    <script src="js/contact_form.js"></script> 
+</body>
+</html>
