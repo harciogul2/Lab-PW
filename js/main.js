@@ -1,19 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ==========================================
-    // EXERCIȚIUL 2: Validare Formular Contact
-    // ==========================================
+   
+    // Validare Formular Contact
     const form = document.getElementById('contactForm');
     const feedbackMsg = document.getElementById('formFeedback');
 
     form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Oprește reîncărcarea paginii
+        event.preventDefault(); // Opreste reincarcarea paginii
 
         const nume = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
         const mesaj = document.getElementById('message').value.trim();
 
-        // Validări
+        // Validari
         if (nume.length < 2) {
             feedbackMsg.textContent = "Eroare: Numele trebuie să aibă cel puțin 2 caractere!";
             feedbackMsg.style.color = "red";
@@ -32,69 +31,14 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Dacă trece de toate validările
+        // totul ok
         feedbackMsg.textContent = `Mulțumim, ${nume}! Mesajul a fost trimis.`;
         feedbackMsg.style.color = "green";
         
-        // Opțional: golim formularul după trimitere cu succes
+        //golim formularul dupa trimitere cu succes
         form.reset();
     });
 
 
-    // Buton Dark / Light Mode
-    
-    const themeToggleBtn = document.getElementById('theme-toggle');
-
-    themeToggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-
-        // Schimbăm textul butonului în funcție de temă
-        if (document.body.classList.contains('dark-mode')) {
-            themeToggleBtn.innerHTML = '<a>☀️ Light Mode</a>';
-        } else {
-            themeToggleBtn.innerHTML = '<a>🌙 Dark Mode</a>';
-        }
-    });
-
-
-    //Afișare / Ascundere sectiuni
    
-    const sectionHeaders = document.querySelectorAll('main h2');
-
-    sectionHeaders.forEach(h2 => {
-        // Adăugăm un indicator vizual inițial (triunghi în jos)
-        h2.innerHTML = '▼ ' + h2.innerHTML;
-
-        h2.addEventListener('click', function() {
-            // this.nextElementSibling va selecta div.section-content de sub h2
-            const content = this.nextElementSibling;
-            content.classList.toggle('hidden');
-
-            // Schimbăm indicatorul în funcție de starea de vizibilitate
-            if (content.classList.contains('hidden')) {
-                this.innerHTML = this.innerHTML.replace('▼', '▶');
-            } else {
-                this.innerHTML = this.innerHTML.replace('▶', '▼');
-            }
-        });
-    });
-
-
-    //  Buton Back to top
-   
-    const backToTopBtn = document.getElementById('back-to-top');
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.remove('hidden');
-        } else {
-            backToTopBtn.classList.add('hidden');
-        }
-    });
-
-    backToTopBtn.addEventListener('click', () => {
-        
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
 });
