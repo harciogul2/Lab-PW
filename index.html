@@ -3,73 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prezentare Personală - Student</title>
+    <title>Prezentare Personală - Iaru Briana Maria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <header>
-        <h1>Iaru Briana Maria</h1>
-        <p>Studenta la Facultatea de Inginerie Electrica si Stiinta Calculatoarelor, Specializarea Calculatoare, Anul II</p>
-        <p id="salut"></p> 
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+
+    <header class="content-card header-card">
+        <div class="header-main">
+            <div class="profile-wrapper">
+                <img src="images/profil.png" alt="Poza de profil a Brianei" loading="lazy" class="profile-img">
+            </div>
+            <div>
+                <h1>Iaru Briana Maria</h1>
+                <p class="subtitle">Studentă la Facultatea de Inginerie Electrică și Știința Calculatoarelor, Specializarea Calculatoare, Anul II</p>
+            </div>
+        </div>
+        <p id="salut" class="salut-badge"></p> 
     </header>
 
-    <nav>
+    <nav class="modern-nav">
         <ul>
             <li><a href="#about">Despre</a></li>
             <li><a href="#education">Educație</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li id="theme-toggle" class="theme-btn"><a>🌙 Dark Mode</a></li>
         </ul>
     </nav>
 
     <main>
-        <section id="about">
+        <section id="about" class="content-card">
             <h2>Despre mine</h2>
-            <img src="images/profil.png" alt="Poza de profil a Brianei" loading="lazy" width="100" class="profile-img">
-            <p>Sunt un pasionata de tehnologie și motorsport, dornica să învăț cele mai noi standarde în domeniu.</p>
+            <div class="section-content">
+                <p>Sunt o persoană pasionată de tehnologie și motorsport, dornică să învăț cele mai noi standarde în domeniu și să construiesc aplicații de impact, estetice și utile.</p>
+            </div>
         </section>
 
-        <section id="education">
+        <section id="education" class="content-card">
             <h2>Educație</h2>
-            <ol>
-                <li>Colegiul National Dinicu Golescu (2020-2024)</li>
-                <li>Universitatea Transilvania-Iesc(2024-Prezent)</li>
-            </ol>
+            <div class="section-content">
+                <ul class="styled-list">
+                    <li>
+                        <strong>Universitatea Transilvania - IESC</strong>
+                        <span class="date-badge">2024 - Prezent</span>
+                    </li>
+                    <li>
+                        <strong>Colegiul Național "Dinicu Golescu"</strong>
+                        <span class="date-badge">2020 - 2024</span>
+                    </li>
+                </ul>
+            </div>
         </section>
     </main>
 
-    <aside>
+    <aside class="content-card quote-card">
         <h3>Hobby-uri & Citate</h3>
-        <p><em>"Codul este ca umorul. Dacă trebuie să îl explici, e prost."</em> - Cory House</p>
-        <ul>
-            <li>Calatorit</li>
-            <li>Șah</li>
-        </ul>
+        <blockquote class="pretty-quote">
+            "Codul este ca umorul. Dacă trebuie să îl explici, e prost."
+            <cite>- Cory House</cite>
+        </blockquote>
+        <div class="tags">
+            <span class="tag">✈️ Călătorit</span>
+            <span class="tag">♟️ Șah</span>
+            <span class="tag">🏎️ Motorsport</span>
+        </div>
     </aside>
 
-    <footer id="contact">
-        <h3>Contactează-mă</h3>
-        <form id="contactForm">
-            <label for="name">Nume:</label>
-            <input type="text" id="name" autocomplete="name">
+    <footer id="contact" class="content-card footer-card">
+        <div class="footer-header">
+            <h3>Contactează-mă</h3>
+            <p>Ai o propunere de proiect sau vrei doar să mă saluți?</p>
+        </div>
+        
+        <form id="contactForm" novalidate>
+            <div class="form-group">
+                <label for="name">Nume:</label>
+                <input type="text" id="name" autocomplete="name" placeholder="Numele tău complet">
+            </div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" autocomplete="email" required>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" autocomplete="email" placeholder="adresa@email.com">
+            </div>
 
-            <label for="message">Mesaj:</label>
-            <textarea id="message" required minlength="10"></textarea>
+            <div class="form-group">
+                <label for="message">Mesaj:</label>
+                <textarea id="message" placeholder="Scrie mesajul tău aici..." rows="4"></textarea>
+            </div>
 
-            <button type="submit" onclick="submitForm()">Trimite</button>
+            <button type="submit" class="btn-primary">Trimite mesajul</button>
+            <p id="formFeedback" class="feedback-msg"></p>
         </form>
-        <p>&copy; 2026 Laborator Programare Web.</p>
+        <div class="copyright">
+            <p>&copy; 2026 Laborator Programare Web. Toate drepturile rezervate.</p>
+        </div>
     </footer>
 
-   
-
- <script>
-        alert("Hello World!");
-    </script>
-    <script src="js/contact_form.js"></script> 
     <script src="js/salut.js"></script>
+    <script src="js/main.js"></script> 
 </body>
 </html>

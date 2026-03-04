@@ -1,10 +1,43 @@
-/* Recapitulare CSS */
+
 :root {
-    --primary-color: #0c4885;
-    --secondary-color: #d6dfdb;
-    --background-color: #d6dfdb;
-    --text-color: #333;
-    --white: #ffffff;
+    /* Light Mode */
+    --bg-gradient: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%); /* Piersică Soft */
+    --bg-blobs: rgba(121, 40, 202, 0.08); 
+    
+    /* Culori containere si text */
+    --surface-color: rgba(255, 255, 255, 0.9); 
+    --text-primary: #1e1b4b;
+    --text-secondary: #475569; 
+    
+    
+    --accent-primary: #5f27cd;
+    --accent-secondary: #f368e0; 
+    --accent-hover: #e056fd; 
+    
+    --border-color: #f1f5f9;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 15px 40px rgba(95, 39, 205, 0.1);
+    
+    --radius-lg: 20px;
+    --radius-md: 10px;
+    --transition: all 0.4s ease;
+}
+
+body.dark-mode {
+    /*Dark Mode */
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); 
+    --bg-blobs: rgba(6, 182, 212, 0.08); 
+
+    --surface-color: rgba(17, 24, 39, 0.85); 
+    --text-primary: #f1f5f9; 
+    --text-secondary: #94a3b8; 
+    
+    --accent-primary: #818cf8; 
+    --accent-secondary: #ff9ff3; 
+    
+    --border-color: #1f2937;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --shadow-hover: 0 15px 40px rgba(129, 140, 248, 0.15);
 }
 
 * {
@@ -13,84 +46,274 @@
     padding: 0;
 }
 
-body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    max-width: 80%;
-    margin: 0 auto;
-    line-height: 1.6;
-    pasdding: 20px;
+html {
+    scroll-behavior: smooth; 
 }
 
-/* Imagine de profil */
+body {
+    font-family: 'Inter', sans-serif; 
+    background: var(--bg-gradient);
+    background-attachment: fixed; 
+    color: var(--text-primary);
+    line-height: 1.7;
+    padding: 2rem;
+    max-width: 900px; 
+    margin: 0 auto;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    position: relative; 
+    overflow-x: hidden; 
+}
+
+/*  ELEMENTE DECORATIVE DE FUNDAL*/
+.bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -1;
+    background-color: var(--bg-blobs);
+    transition: background-color 0.4s ease;
+}
+
+.bg-blob-1 { width: 400px; height: 400px; top: -100px; right: -100px; }
+.bg-blob-2 { width: 300px; height: 300px; bottom: 50px; left: -100px; }
+
+
+h1, h2, h3 { color: var(--text-primary); margin-bottom: 1.2rem; font-weight: 800; }
+h1 { font-size: 2.5rem; letter-spacing: -0.04em; } /* Titlu principal mai impactant */
+p { color: var(--text-secondary); margin-bottom: 1rem; }
+
+
+.content-card {
+    background: var(--surface-color);
+    backdrop-filter: blur(10px); /* Efect de sticla mata */
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.content-card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(95, 39, 205, 0.1); 
+}
+
+/* Header specific */
+.header-card { text-align: center; }
+
+.header-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Inel gradient în jurul pozei de profil */
+.profile-wrapper {
+    padding: 4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    display: inline-block;
+}
+
 .profile-img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     object-fit: cover;
+    border: 4px solid var(--surface-color); 
+    transition: transform 0.3s ease;
 }
 
-/* Navigare */
-nav ul {
-    list-style: none;
-    background: var(--primary-color);
-    padding: 10px;
-    text-align: center;
-    border-radius: 45%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+.profile-wrapper:hover .profile-img {
+    transform: scale(1.05); 
 }
 
-nav ul li {
+.subtitle {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Badge pentru mesajul de salut */
+.salut-badge {
     display: inline-block;
-    margin-right: 15px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--text-color);
-    background: var(--secondary-color);
-    padding: 8px 16px;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
-
-nav ul li a:hover {
-    background: #2980b9;
-}
-
- /*Formular*/
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 400px;
-}
-
-input, textarea, button {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
-    background: var(--primary-color);
-    color:  var(--secondary-color);
-    cursor: pointer;
-    border: none;
-}
-
-#salut {
-    text-align: center; 
-    background-color: #0c4885;
+    background-color: var(--accent-primary);
     color: white;
-    margin: 20px auto;  
-    padding: 15px;      
-    width: fit-content; 
-    max-width: 80%;     
-    border-radius: 8px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-    transition: all 0.5s ease; 
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
 }
+
+
+.modern-nav {
+    position: sticky; /*  fix sus */
+    top: 20px;
+    z-index: 100;
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.modern-nav ul {
+    list-style: none;
+    background: var(--surface-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.6rem 1rem;
+    border-radius: 50px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    gap: 0.5rem;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.modern-nav ul li a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.3rem;
+    border-radius: 50px;
+    transition: var(--transition);
+    cursor: pointer;
+    display: inline-block;
+}
+
+.modern-nav ul li a:hover {
+    color: var(--accent-primary);
+    background: rgba(95, 39, 205, 0.05);
+}
+
+.theme-btn a { 
+    background: rgba(243, 104, 224, 0.1); 
+    color: var(--accent-secondary) !important; 
+}
+
+
+/*lista ed stil*/
+.styled-list { list-style: none; }
+.styled-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.styled-list li:last-child { border-bottom: none; }
+
+.date-badge {
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    background: rgba(95, 39, 205, 0.05);
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+/* citat stilizat */
+.pretty-quote {
+    font-style: italic;
+    color: var(--text-secondary);
+    border-left: 4px solid var(--accent-secondary); 
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+.pretty-quote cite { 
+    display: block; 
+    font-weight: 700; 
+    margin-top: 0.5rem; 
+    font-style: normal; 
+    color: var(--text-primary);
+}
+
+/* tag-uri rotunjite */
+.tags { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.tag {
+    background: #f1f5f9;
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+body.dark-mode .tag { background: #1f2937; }
+
+/* form*/
+.footer-header { text-align: center; margin-bottom: 2rem; }
+
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { 
+    display: block;
+    margin-bottom: 0.5rem; 
+    font-weight: 600; 
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: #f8fafc;
+    color: var(--text-primary);
+    font-family: inherit;
+    transition: var(--transition);
+}
+body.dark-mode input, body.dark-mode textarea { background: #0f172a; }
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: var(--surface-color);
+    box-shadow: 0 0 0 4px rgba(95, 39, 205, 0.1);
+}
+
+/*Butonul principal */
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(243, 104, 224, 0.3);
+}
+
+.btn-primary:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 25px rgba(243, 104, 224, 0.4);
+}
+
+.feedback-msg { margin-top: 1rem; font-weight: 600; font-size: 0.95rem; text-align: center; }
+
+.copyright { 
+    text-align: center; 
+    margin-top: 3rem; 
+    padding-top: 2rem; 
+    border-top: 1px solid var(--border-color); 
+    font-size: 0.9rem; 
+    color: var(--text-secondary);
+}
+
+
+main h2 {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s ease;
+}
+main h2:hover { color: var(--accent-primary); }
+
+.hidden { display: none !important; }
+

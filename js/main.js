@@ -40,5 +40,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-   
+    // Buton Dark / Light Mode
+    
+    const themeToggleBtn = document.getElementById('theme-toggle');
+
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+
+        // Schimbăm textul butonului în funcție de temă
+        if (document.body.classList.contains('dark-mode')) {
+            themeToggleBtn.innerHTML = '<a>☀️ Light Mode</a>';
+        } else {
+            themeToggleBtn.innerHTML = '<a>🌙 Dark Mode</a>';
+        }
+    });
+
+
+    
 });
