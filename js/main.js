@@ -54,7 +54,47 @@ document.addEventListener("DOMContentLoaded", () => {
             themeToggleBtn.innerHTML = '<a>🌙 Dark Mode</a>';
         }
     });
+//afis/ascundere sect
+    const sectionHeaders = document.querySelectorAll('main h2');
 
+    sectionHeaders.forEach(h2 => {
+        
+        h2.innerHTML = '▼ ' + h2.innerHTML;
 
+        h2.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            
+            if (content) {
+                content.classList.toggle('hidden');
+
+                // schimbare ind
+                if (content.classList.contains('hidden')) {
+                    this.innerHTML = this.innerHTML.replace('▼', '▶');
+                } else {
+                    this.innerHTML = this.innerHTML.replace('▶', '▼');
+                }
+            }
+        });
+    });
+
+  
+    // Back to top"
+
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            // Afis butonul doar daca s a scrollat peste 300px
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
     
 });
