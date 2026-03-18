@@ -1,8 +1,11 @@
+// 1. importam componenta Card la inceputul fisierului
+import Card from './Card';
+
 function App() {
   return (
     <div>
-      <h1>Laborator Pw</h1>
-      <h2>Iaru Briana Maria</h2>
+      <h1>laborator pw</h1>
+      <h2>iaru briana maria</h2>
       
       <p>cateva lucruri despre mine:</p>
       <ul>
@@ -10,6 +13,9 @@ function App() {
         <li>pasionata de tehnologie</li>
         <li>imi place motorsportul si sahul</li>
       </ul>
+
+      {}
+      <Card />
     </div>
   );
 }
