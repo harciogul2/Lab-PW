@@ -1,4 +1,3 @@
-// 1. importam componenta Card la inceputul fisierului
 import Card from './Card';
 
 function App() {
@@ -14,8 +13,10 @@ function App() {
         <li>imi place motorsportul si sahul</li>
       </ul>
 
-      {}
-      <Card />
+      {/* chemam componenta de 3 ori cu date diferite */}
+      <Card title="proiect 1" description="pagina personala cu html si css" />
+      <Card title="proiect 2" description="pagina interactiva cu javascript" />
+      <Card title="proiect 3" description="dashboard cu react" />
     </div>
   );
 }
