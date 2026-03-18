@@ -1,6 +1,16 @@
 import Card from './Card';
 
 function App() {
+  // declaram array-ul cu proiectele noastre
+  const projects = [
+    { title: "proiect 1", description: "pagina personala" },
+    { title: "proiect 2", description: "calculator buget" },
+    { title: "proiect 3", description: "dashboard react" },
+    // am adaugat inca 2 proiecte pentru experiment
+    { title: "proiect 4", description: "aplicatie meteo cu javascript" },
+    { title: "proiect 5", description: "joculet de memorie" }
+  ];
+
   return (
     <div>
       <h1>laborator pw</h1>
@@ -13,10 +23,12 @@ function App() {
         <li>imi place motorsportul si sahul</li>
       </ul>
 
-      {/* chemam componenta de 3 ori cu date diferite */}
-      <Card title="proiect 1" description="pagina personala cu html si css" />
-      <Card title="proiect 2" description="pagina interactiva cu javascript" />
-      <Card title="proiect 3" description="dashboard cu react" />
+      <h3>proiectele mele:</h3>
+      
+      
+      {projects.map(function(item, index) {
+        return <Card key={index} title={item.title} description={item.description} />;
+      })}
     </div>
   );
 }
