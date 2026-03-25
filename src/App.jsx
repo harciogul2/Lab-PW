@@ -1,9 +1,9 @@
-// 1. importam useState din react, pe prima linie
+// importam useState din react
 import { useState } from 'react';
 import Card from './Card';
 
 function App() {
-  // 2. declaram state-ul: 'count' e valoarea, 'setCount' e functia care o modifica. 0 e valoarea initiala.
+  // count->valoarea setCount->functia care o modifica
   const [count, setCount] = useState(0);
 
   const projects = [
@@ -26,10 +26,12 @@ function App() {
         <li>imi place motorsportul si sahul</li>
       </ul>
 
-      {/* 3. adaugam zona contorului */}
+      {/* zona contorului cu toate cele 3 butoane */}
       <div style={{ padding: '15px', border: '1px solid #f7f7f7', marginBottom: '20px' }}>
         <p>ai apasat de {count} ori</p>
-        <button onClick={() => setCount(count + 1)}>click</button>
+        <button onClick={() => setCount(count + 1)}>+1</button>
+        <button onClick={() => setCount(count - 1)}>-1</button>
+        <button onClick={() => setCount(0)}>reset</button>
       </div>
 
       <h3>proiectele mele:</h3>
