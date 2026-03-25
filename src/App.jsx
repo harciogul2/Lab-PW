@@ -1,13 +1,16 @@
+// 1. importam useState din react, pe prima linie
+import { useState } from 'react';
 import Card from './Card';
 
 function App() {
-  // declaram array-ul cu proiectele noastre
+  // 2. declaram state-ul: 'count' e valoarea, 'setCount' e functia care o modifica. 0 e valoarea initiala.
+  const [count, setCount] = useState(0);
+
   const projects = [
     { title: "proiect 1", description: "pagina personala" },
     { title: "proiect 2", description: "calculator buget" },
     { title: "proiect 3", description: "dashboard react" },
-    // am adaugat inca 2 proiecte pentru experiment
-    { title: "proiect 4", description: "aplicatie meteo cu javascript" },
+    { title: "proiect 4", description: "aplicatie meteo" },
     { title: "proiect 5", description: "joculet de memorie" }
   ];
 
@@ -23,8 +26,14 @@ function App() {
         <li>imi place motorsportul si sahul</li>
       </ul>
 
+      {/* 3. adaugam zona contorului */}
+      <div style={{ padding: '15px', border: '1px solid #f7f7f7', marginBottom: '20px' }}>
+        <p>ai apasat de {count} ori</p>
+        <button onClick={() => setCount(count + 1)}>click</button>
+      </div>
+
       <h3>proiectele mele:</h3>
-      git
+      
       {projects.map(function(item, index) {
         return <Card key={index} title={item.title} description={item.description} />;
       })}
