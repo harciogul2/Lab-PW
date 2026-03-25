@@ -1,6 +1,7 @@
 // importam useState din react
 import { useState } from 'react';
 import Card from './Card';
+import QuickNote from './QuickNote';
 
 function App() {
   // count->valoarea setCount->functia care o modifica
@@ -33,7 +34,7 @@ function App() {
         <button onClick={() => setCount(count - 1)}>-1</button>
         <button onClick={() => setCount(0)}>reset</button>
       </div>
-
+  <QuickNote />
       <h3>proiectele mele:</h3>
       
       {projects.map(function(item, index) {
