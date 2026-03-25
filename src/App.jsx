@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Card from './Card';
 import QuickNote from './QuickNote';
+import TodoList from './TodoList';
 
 function App() {
   // count->valoarea setCount->functia care o modifica
@@ -34,7 +35,10 @@ function App() {
         <button onClick={() => setCount(count - 1)}>-1</button>
         <button onClick={() => setCount(0)}>reset</button>
       </div>
-  <QuickNote />
+
+      <QuickNote />
+      <TodoList />
+
       <h3>proiectele mele:</h3>
       
       {projects.map(function(item, index) {
