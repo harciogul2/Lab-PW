@@ -24,8 +24,7 @@ function App() {
       </ul>
 
       <h3>proiectele mele:</h3>
-      
-      
+      git
       {projects.map(function(item, index) {
         return <Card key={index} title={item.title} description={item.description} />;
       })}
