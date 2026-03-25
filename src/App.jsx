@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Card from './Card';
 import QuickNote from './QuickNote';
 import TodoList from './TodoList';
+import ContactForm from './ContactForm';
 
 function App() {
   // count->valoarea setCount->functia care o modifica
@@ -38,6 +39,7 @@ function App() {
 
       <QuickNote />
       <TodoList />
+      <ContactForm />
 
       <h3>proiectele mele:</h3>
       
