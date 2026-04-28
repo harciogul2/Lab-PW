@@ -1,21 +1,13 @@
-// importam useState din react
 import { useState } from 'react';
 import Card from './Card';
 import QuickNote from './QuickNote';
 import TodoList from './TodoList';
 import ContactForm from './ContactForm';
+import ProjectList from './ProjectList';   // lab 6 - ex 1-4
+import UserList from './UserList';         // lab 6 - ex 5 bonus
 
 function App() {
-  // count->valoarea setCount->functia care o modifica
   const [count, setCount] = useState(0);
-
-  const projects = [
-    { title: "proiect 1", description: "pagina personala" },
-    { title: "proiect 2", description: "calculator buget" },
-    { title: "proiect 3", description: "dashboard react" },
-    { title: "proiect 4", description: "aplicatie meteo" },
-    { title: "proiect 5", description: "joculet de memorie" }
-  ];
 
   return (
     <div>
@@ -29,7 +21,6 @@ function App() {
         <li>imi place motorsportul si sahul</li>
       </ul>
 
-      {/* zona contorului cu toate cele 3 butoane */}
       <div style={{ padding: '15px', border: '1px solid #f7f7f7', marginBottom: '20px' }}>
         <p>ai apasat de {count} ori</p>
         <button onClick={() => setCount(count + 1)}>+1</button>
@@ -41,11 +32,11 @@ function App() {
       <TodoList />
       <ContactForm />
 
-      <h3>proiectele mele:</h3>
-      
-      {projects.map(function(item, index) {
-        return <Card key={index} title={item.title} description={item.description} />;
-      })}
+      {/* lab 6: proiecte incarcate din JSON cu fetch */}
+      <ProjectList />
+
+      {/* lab 6 bonus: utilizatori de la API public */}
+      <UserList />
     </div>
   );
 }
