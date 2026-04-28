@@ -1,75 +1,70 @@
-import { useState } from "react";
- function ContactForm(){
-     const [name, setName]= useState('');
-     const [email, setEmail]= useState(''); 
-     const [message, setMessage]= useState('');
-     const [feedback, setFeedback] = useState('');
+import { useState } from 'react';
 
-     function handleSubmit() {
-    // trim -> ignora spatiile goale
+function ContactForm() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [feedback, setFeedback] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  function handleSubmit() {
     if (name.trim() === '' || email.trim() === '' || message.trim() === '') {
       setFeedback('Completeaza toate campurile!');
-    } else 
-        if(name.trim().length<3)
-            {
-                setFeedback('Numele trebuie sa aiba minim 3 caractere!');
-             }
-             else if (!email.includes('@') || email.trim().length <= 10) 
-                {
-                     setFeedback('Email-ul trebuie sa contina @ si sa aiba peste 10 caractere!');
-         }
-         else {
-      setFeedback('Multumim, ' + name + '!');
+      setIsSuccess(false);
+    } else if (name.trim().length < 3) {
+      setFeedback('Numele trebuie sa aiba minim 3 caractere!');
+      setIsSuccess(false);
+    } else if (!email.includes('@') || email.trim().length <= 10) {
+      setFeedback('Email-ul trebuie sa contina @ si sa aiba peste 10 caractere!');
+      setIsSuccess(false);
+    } else {
+      setFeedback('Multumim, ' + name + '! Mesajul a fost trimis.');
+      setIsSuccess(true);
     }
   }
+
   return (
-    <div style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '10px', marginBottom: '20px' }}>
+    <div className="section-card">
       <h3>formular de contact</h3>
-      
-      {/* input pentru nume */}
-      <div style={{ marginBottom: '10px' }}>
-        <input 
-          type="text" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)} 
-          placeholder="numele tau" 
-          style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+
+      <div className="form-field">
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="numele tau"
         />
       </div>
 
-      {/* input pentru email */}
-      <div style={{ marginBottom: '10px' }}>
-        <input 
-          type="email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          placeholder="adresa de email" 
-          style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+      <div className="form-field">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="adresa de email"
         />
       </div>
 
-      {/* textarea pentru mesaj ==input dar cu mai multe randuri*/}
-      <div style={{ marginBottom: '10px' }}>
-        <textarea 
-          value={message} 
-          onChange={(e) => setMessage(e.target.value)} 
-          placeholder="scrie mesajul tau aici..." 
+      <div className="form-field">
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="scrie mesajul tau aici..."
           rows="4"
-          style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
         />
       </div>
 
-      <button onClick={handleSubmit} style={{ padding: '8px 15px', cursor: 'pointer' }}>
-        Submit
+      <button className="btn-primary" onClick={handleSubmit}>
+        trimite mesajul
       </button>
 
-      {/* afisam feedback ul doar daca are ceva text in el */}
       {feedback !== '' && (
-        <p style={{ marginTop: '15px', fontWeight: 'bold', color: feedback.includes('Multumim') ? 'green' : 'red' }}>
+        <div className={`form-feedback ${isSuccess ? 'success' : 'error'}`}>
           {feedback}
-        </p>
+        </div>
       )}
     </div>
   );
- }
+}
+
 export default ContactForm;

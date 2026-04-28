@@ -4,8 +4,8 @@ import Card from './Card';
 function ProjectList() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);       // ex. 2: error handling
-  const [search, setSearch] = useState('');        // ex. 3: filtrare
+  const [error, setError] = useState(null);
+  const [search, setSearch] = useState('');
 
   useEffect(function() {
     fetch('/data/projects.json')
@@ -17,60 +17,52 @@ function ProjectList() {
         setLoading(false);
       })
       .catch(function(err) {
-        setError('Eroare la incarcarea datelor');  // ex. 2
+        setError('Eroare la incarcarea datelor');
         setLoading(false);
       });
   }, []);
 
-  if (loading) {
-    return <p>Se incarca...</p>;
-  }
+  if (loading) return <div className="section-card"><p className="state-msg">Se incarca...</p></div>;
+  if (error)   return <div className="section-card"><p className="state-msg error">{error}</p></div>;
 
-  if (error) {
-    return <p style={{ color: 'red' }}>{error}</p>;
-  }
-
-  // ex. 3: filtrare case-insensitive dupa titlu
   const filtered = projects.filter(function(p) {
     return p.title.toLowerCase().includes(search.toLowerCase());
   });
 
-  // ex. 4: statistici
-  const total = projects.length;
+  const total      = projects.length;
   const finalizate = projects.filter(p => p.done).length;
-  const inLucru = projects.filter(p => !p.done).length;
+  const inLucru    = projects.filter(p => !p.done).length;
 
   return (
-    <div style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '10px', marginBottom: '20px' }}>
-      <h3>Proiecte (din JSON)</h3>
+    <div className="section-card">
+      <h3>proiecte din json</h3>
 
-      {/* ex. 3: input de cautare */}
-      <input
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder="cauta dupa titlu..."
-        style={{ padding: '8px', marginBottom: '15px', width: '100%', boxSizing: 'border-box' }}
-      />
+      <div className="search-input">
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="cauta dupa titlu..."
+        />
+      </div>
 
-      {/* afisare proiecte filtrate cu Card */}
-      {filtered.map(function(item) {
-        return (
-          <Card
-            key={item.id}
-            title={item.title}
-            description={`Tehnologii: ${item.tech} | Status: ${item.done ? '✅ finalizat' : '🔧 in lucru'}`}
-          />
-        );
-      })}
+      {filtered.length === 0
+        ? <p className="state-msg">Niciun proiect gasit.</p>
+        : filtered.map(function(item) {
+            return (
+              <Card
+                key={item.id}
+                title={item.title}
+                description={`${item.tech}  ·  ${item.done ? '✅ finalizat' : '🔧 in lucru'}`}
+              />
+            );
+          })
+      }
 
-      {filtered.length === 0 && <p>Niciun proiect gasit.</p>}
-
-      {/* ex. 4: statistici */}
-      <div style={{ marginTop: '15px', padding: '10px', background: '#f4f4f4', borderRadius: '8px' }}>
-        <strong>Statistici:</strong>
-        <span style={{ marginLeft: '15px' }}>Total: {total}</span>
-        <span style={{ marginLeft: '15px', color: 'green' }}>Finalizate: {finalizate}</span>
-        <span style={{ marginLeft: '15px', color: 'orange' }}>In lucru: {inLucru}</span>
+      <div className="stats-bar">
+        <span className="stat-pill total">📁 Total: {total}</span>
+        <span className="stat-pill done">✅ Finalizate: {finalizate}</span>
+        <span className="stat-pill wip">🔧 In lucru: {inLucru}</span>
       </div>
     </div>
   );

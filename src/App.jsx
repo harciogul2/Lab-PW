@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import Card from './Card';
 import QuickNote from './QuickNote';
 import TodoList from './TodoList';
 import ContactForm from './ContactForm';
-import ProjectList from './ProjectList';   // lab 6 - ex 1-4
-import UserList from './UserList';         // lab 6 - ex 5 bonus
+import ProjectList from './ProjectList';
+import UserList from './UserList';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -13,29 +12,31 @@ function App() {
     <div>
       <h1>laborator pw</h1>
       <h2>iaru briana maria</h2>
-      
-      <p>cateva lucruri despre mine:</p>
-      <ul>
-        <li>studenta la calculatoare</li>
-        <li>pasionata de tehnologie</li>
-        <li>imi place motorsportul si sahul</li>
-      </ul>
 
-      <div style={{ padding: '15px', border: '1px solid #f7f7f7', marginBottom: '20px' }}>
-        <p>ai apasat de {count} ori</p>
-        <button onClick={() => setCount(count + 1)}>+1</button>
-        <button onClick={() => setCount(count - 1)}>-1</button>
-        <button onClick={() => setCount(0)}>reset</button>
+      <div className="about-section">
+        <p>cateva lucruri despre mine</p>
+        <ul>
+          <li>studenta la calculatoare</li>
+          <li>pasionata de tehnologie</li>
+          <li>imi place motorsportul si sahul</li>
+        </ul>
+      </div>
+
+      <div className="section-card">
+        <h3>contor</h3>
+        <div className="counter-display">{count}</div>
+        <p className="counter-label">apasari</p>
+        <div className="btn-group">
+          <button onClick={() => setCount(count + 1)}>+1</button>
+          <button onClick={() => setCount(count - 1)}>−1</button>
+          <button onClick={() => setCount(0)}>reset</button>
+        </div>
       </div>
 
       <QuickNote />
       <TodoList />
       <ContactForm />
-
-      {/* lab 6: proiecte incarcate din JSON cu fetch */}
       <ProjectList />
-
-      {/* lab 6 bonus: utilizatori de la API public */}
       <UserList />
     </div>
   );

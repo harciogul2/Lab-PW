@@ -7,7 +7,6 @@ function UserList() {
   const [search, setSearch] = useState('');
 
   useEffect(function() {
-    // singura diferenta fata de JSON local: URL complet in loc de cale locala
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(function(response) {
         return response.json();
@@ -22,40 +21,39 @@ function UserList() {
       });
   }, []);
 
-  if (loading) {
-    return <p>Se incarca utilizatorii...</p>;
-  }
-
-  if (error) {
-    return <p style={{ color: 'red' }}>{error}</p>;
-  }
+  if (loading) return <div className="section-card"><p className="state-msg">Se incarca utilizatorii...</p></div>;
+  if (error)   return <div className="section-card"><p className="state-msg error">{error}</p></div>;
 
   const filtered = users.filter(function(u) {
     return u.name.toLowerCase().includes(search.toLowerCase());
   });
 
   return (
-    <div style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '10px', marginBottom: '20px' }}>
-      <h3>Utilizatori (API public JSONPlaceholder)</h3>
+    <div className="section-card">
+      <h3>utilizatori — api public</h3>
 
-      <input
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder="cauta dupa nume..."
-        style={{ padding: '8px', marginBottom: '15px', width: '100%', boxSizing: 'border-box' }}
-      />
+      <div className="search-input">
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="cauta dupa nume..."
+        />
+      </div>
 
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {filtered.map(function(user) {
-          return (
-            <li key={user.id} style={{ padding: '8px', borderBottom: '1px solid #eee' }}>
-              <strong>{user.name}</strong> — {user.email} — {user.company.name}
-            </li>
-          );
-        })}
-      </ul>
-
-      {filtered.length === 0 && <p>Niciun utilizator gasit.</p>}
+      {filtered.length === 0
+        ? <p className="state-msg">Niciun utilizator gasit.</p>
+        : <ul className="user-list">
+            {filtered.map(function(user) {
+              return (
+                <li key={user.id} className="user-item">
+                  <span className="user-name">{user.name}</span>
+                  <span className="user-meta">{user.email} · {user.company.name}</span>
+                </li>
+              );
+            })}
+          </ul>
+      }
     </div>
   );
 }
