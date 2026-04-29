@@ -3,7 +3,8 @@ import Navbar from './Navbar';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
-import './App.css';
+import './App.css'; //lab 7 ex3
+import NotFound from './pages/NotFound'; //lab7-ex 4 err404
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +13,7 @@ function App() {
         <Route path="/"         element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact"  element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
