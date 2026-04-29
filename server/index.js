@@ -67,6 +67,19 @@ app.delete('/api/projects/:id', function(req, res) {
   res.json({ message: 'Deleted' });
 });
 
+//lab8 ex6-actualizare proiect
+// PUT /api/projects/:id - actualizeaza un proiect existent
+app.put('/api/projects/:id', function(req, res) {
+  const project = projects.find(p => p.id === parseInt(req.params.id));
+  if (!project) {
+    return res.status(404).json({ error: 'Not found' });
+  }
+  if (req.body.title) project.title = req.body.title;
+  if (req.body.tech) project.tech = req.body.tech;
+  if (req.body.done !== undefined) project.done = req.body.done;
+  res.json(project);
+});
+
 // Porneste serverul
 app.listen(PORT, function() {
   console.log('Server pornit pe http://localhost:' + PORT);
