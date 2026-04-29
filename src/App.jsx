@@ -5,6 +5,7 @@ import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import './App.css'; //lab 7 ex3
 import NotFound from './pages/NotFound'; //lab7-ex 4 err404
+import About from './pages/About'; //lab7-ex5 pag about
 function App() {
   return (
     <BrowserRouter>
@@ -12,8 +13,11 @@ function App() {
       <Routes>
         <Route path="/"         element={<Home />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/contact"  element={<Contact />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/contact"  element={<Contact />} /> 
+        <Route path="/about"    element={<About />} />
+        <Route path="*"         element={<NotFound />} />
+      
+
       </Routes>
     </BrowserRouter>
   );
