@@ -26,4 +26,13 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  //eroare cu requiere eroare falsa
+  {
+    files : ['server/**/*.js'],
+    extends: [js.confings.recommended],
+    languageOptions: {
+      globals: globals.node,
+      sourceType: 'commonjs',
+    }
+  }
 ])
