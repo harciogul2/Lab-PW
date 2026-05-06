@@ -80,8 +80,23 @@ app.post('/api/projects', function(req, res) {
   };
   projects.push(newProject);
   res.status(201).json(newProject);
-});
+});*/
 
+//lab9 ex5: POST /api/projects - salveaza in MongoDB
+app.post('/api/projects', async function(req, res) {
+  try {
+    const newProject = new Project({
+      title: req.body.title,
+      tech: req.body.tech,
+      done: req.body.done || false,
+    });
+    const saved = await newProject.save();
+    res.status(201).json(saved);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+/*
 //lab8 ex 5-stergere proiect 
 // DELETE /api/projects/:id - sterge un proiect dupa id
 app.delete('/api/projects/:id', function(req, res) {
