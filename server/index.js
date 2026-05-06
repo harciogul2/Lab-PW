@@ -16,27 +16,43 @@ const PORT = 3000;
 // Middleware pentru citirea JSON din body
 app.use(express.json()); 
 
+//lab9 ex3: import model
+const Project = require('./models/Project');
+
 // GET / - ruta principala Rută API pentru proiecte
 app.get('/', function(req, res) {
   res.json({ message: 'Serverul functioneaza!' });
 });
+
 //lab 8 ex 2
 // Date (temporar in memorie,vom folosi MongoDB mai tarziu)
-const projects = [
+/*const projects = [
   { id: 1, title: "Pagina Personala", tech: "HTML, CSS", done: true },
   { id: 2, title: "Calculator Buget", tech: "JS", done: true },
   { id: 3, title: "Dashboard React", tech: "React", done: false },
   { id: 4, title: "API Meteo", tech: "React, API", done: false },
 ];
 
+//lab 8
 // GET /api/projects - returneaza toate proiectele
 app.get('/api/projects', function(req, res) {
   res.json(projects);
 });
+*/
+
+//lab9 ex4: GET /api/projects - returneaza toate proiectele din MongoDB
+app.get('/api/projects', async function(req, res) {
+  try {
+    const projects = await Project.find();
+    res.json(projects);
+  } catch (err) {
+    res.status(500).json({ error: 'Eroare ' + err });
+  }
+});
 
 //lab8 ex 3
 //GET /api/projects/:id -returneaza un singur proiect dupa id
-app.get('/api/projects/:id', function(req, res) {
+/*app.get('/api/projects/:id', function(req, res) {
   const project = projects.find(p => p.id === parseInt(req.params.id));
   if (!project) {
     return res.status(404).json({ error: 'Not found' });
@@ -51,6 +67,7 @@ app.get('/api/stats', function(req, res) {
     inLucru: projects.filter(p => !p.done).length,
   });
 });
+
 
 //lab8 ex 4-adaugare proiect
 // POST /api/projects - adauga un proiect nou
@@ -89,6 +106,7 @@ app.put('/api/projects/:id', function(req, res) {
   if (req.body.done !== undefined) project.done = req.body.done;
   res.json(project);
 });
+*/
 
 // Porneste serverul
 app.listen(PORT, function() {
