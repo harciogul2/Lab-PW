@@ -1,5 +1,10 @@
 const express = require('express');
 const app = express();
+
+//lab10 ex1: CORS - permite cereri de la React (port 5173)
+const cors = require('cors');
+app.use(cors());
+
 //lab 9 ex 2  2: Conectare la MongoDB cu Mongoose
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/dashboard')
