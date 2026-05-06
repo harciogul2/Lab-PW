@@ -1,5 +1,15 @@
 const express = require('express');
 const app = express();
+//lab 9 ex 2  2: Conectare la MongoDB cu Mongoose
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/dashboard')
+ .then(function() {
+ console.log('Conectat la MongoDB!');
+ })
+ .catch(function(err) {
+ console.error('Eroare conectare MongoDB:', err);
+ });
+
 const PORT = 3000;
 
 //lab8-ex 4
