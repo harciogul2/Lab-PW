@@ -31,22 +31,35 @@ fetch('http://localhost:3000/api/projects')
         setLoading(false);
       });
   }, []);
+
   // lab10 ex4: trimite proiect nou la API
 async function handleSubmit() {
  try {
- const response = await fetch('http://localhost:3000/api/projects', {
- method: 'POST',
- headers: { 'Content-Type': 'application/json' },
- body: JSON.stringify({ title: title, tech: tech }),
- });
- const newProject = await response.json();
- setProjects([...projects, newProject]);
- setTitle(''); // Goleste input-urile
- setTech('');
- } catch (err) {
- console.error('Eroare:', err);
- }
-}
+    const response = await fetch('http://localhost:3000/api/projects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: title, tech: tech }),
+    });
+    const newProject = await response.json();
+        setProjects([...projects, newProject]);
+        setTitle(''); // Goleste input-urile
+         setTech('');
+    } catch (err) {
+    console.error('Eroare:', err);
+    }
+  }
+/// lab10 ex5: sterge proiect din API si din state
+  async function handleDelete(id) {
+    try {
+      await fetch('http://localhost:3000/api/projects/' + id, {
+        method: 'DELETE',
+      });
+      setProjects(projects.filter(p => p._id !== id));
+    } catch (err) {
+      console.error('Eroare stergere:', err);
+    }
+  }
+
   if (loading) return <div className="section-card"><p className="state-msg">Se incarca...</p></div>;
   if (error)   return <div className="section-card"><p className="state-msg error">{error}</p></div>;
 
@@ -92,13 +105,22 @@ async function handleSubmit() {
       {filtered.length === 0
         ? <p className="state-msg">Niciun proiect gasit.</p>
         : filtered.map(function(item) {
-            return (
-              <Card
-                key={item.id}
-                title={item.title}
-                description={`${item.tech}  ·  ${item.done ? '✅ finalizat' : '🔧 in lucru'}`}
-              />
-            );
+           return (
+            //lab 10 ex5 modificare buton delete + aspect
+                <div key={item._id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <Card
+                    title={item.title}
+                    description={`${item.tech}  ·  ${item.done ? '✅ finalizat' : '🔧 in lucru'}`}
+                  />
+                  <button
+                    className="btn-danger"
+                    onClick={() => handleDelete(item._id)}
+                    style={{ marginLeft: '10px', flexShrink: 0 }}
+                  >
+                    sterge
+                  </button>
+                </div>
+              );
           })
       }
 
