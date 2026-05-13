@@ -59,6 +59,21 @@ async function handleSubmit() {
       console.error('Eroare stergere:', err);
     }
   }
+//lab 11 ex 1 functie async toggle done/undone
+async function handleToggle(id, currentDone) {
+    try {
+      const response = await fetch('http://localhost:3000/api/projects/' + id, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ done: !currentDone }),
+      });
+      const updatedProject = await response.json();
+      setProjects(projects.map(p => p._id === id ? updatedProject : p));
+    } catch (err) {
+      console.error('Eroare toggle:', err);
+    }
+  }
+
 
   if (loading) return <div className="section-card"><p className="state-msg">Se incarca...</p></div>;
   if (error)   return <div className="section-card"><p className="state-msg error">{error}</p></div>;
@@ -102,25 +117,33 @@ async function handleSubmit() {
         />
       </div>
 
-      {filtered.length === 0
+       {filtered.length === 0
         ? <p className="state-msg">Niciun proiect gasit.</p>
         : filtered.map(function(item) {
-           return (
-            //lab 10 ex5 modificare buton delete + aspect
-                <div key={item._id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <Card
-                    title={item.title}
-                    description={`${item.tech}  ·  ${item.done ? '✅ finalizat' : '🔧 in lucru'}`}
-                  />
+            return (
+              <div key={item._id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                <Card
+                  title={item.title}
+                  description={`${item.tech}  ·  ${item.done ? '✅ finalizat' : '🔧 in lucru'}`}
+                />
+                <div style={{ display: 'flex', gap: '6px', marginLeft: '10px', flexShrink: 0 }}>
+                  {/* lab11 ex1: toggle */}
+                  <button
+                    onClick={() => handleToggle(item._id, item.done)}
+                    style={{ fontSize: '0.75rem', padding: '4px 10px' }}
+                  >
+                    {item.done ? 'anuleaza' : 'finalizeaza'}
+                  </button>
+                  {/* lab10 ex5: sterge */}
                   <button
                     className="btn-danger"
                     onClick={() => handleDelete(item._id)}
-                    style={{ marginLeft: '10px', flexShrink: 0 }}
                   >
                     sterge
                   </button>
                 </div>
-              );
+              </div>
+            );
           })
       }
 
