@@ -8,12 +8,18 @@ function ProjectList() {
   const [search, setSearch] = useState('');
 
   useEffect(function() {
-    fetch('/data/projects.json')
+  // INAINTE (JSON static):
+    //fetch('/data/projects.json')
+    //DUPA (API Express): lab 10 ex 2
+
+fetch('http://localhost:3000/api/projects')
       .then(function(response) {
         return response.json();
       })
       .then(function(data) {
-        setProjects(data.projects);
+        //setProjects(data.projects);
+        setProjects(data)
+
         setLoading(false);
       })
       .catch(function(err) {
