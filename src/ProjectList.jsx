@@ -7,6 +7,10 @@ function ProjectList() {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
 
+  // lab10 ex4: state-uri pentru formular
+    const [title, setTitle] = useState('');
+    const [tech, setTech] = useState('');
+  
   useEffect(function() {
   // INAINTE (JSON static):
     //fetch('/data/projects.json')
@@ -27,7 +31,22 @@ fetch('http://localhost:3000/api/projects')
         setLoading(false);
       });
   }, []);
-
+  // lab10 ex4: trimite proiect nou la API
+async function handleSubmit() {
+ try {
+ const response = await fetch('http://localhost:3000/api/projects', {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({ title: title, tech: tech }),
+ });
+ const newProject = await response.json();
+ setProjects([...projects, newProject]);
+ setTitle(''); // Goleste input-urile
+ setTech('');
+ } catch (err) {
+ console.error('Eroare:', err);
+ }
+}
   if (loading) return <div className="section-card"><p className="state-msg">Se incarca...</p></div>;
   if (error)   return <div className="section-card"><p className="state-msg error">{error}</p></div>;
 
@@ -42,6 +61,24 @@ fetch('http://localhost:3000/api/projects')
   return (
     <div className="section-card">
       <h3>proiecte din json</h3>
+{/* lab10 ex4: formular adaugare proiect */}
+      <div style={{ marginBottom: '20px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="titlu proiect..."
+          style={{ flex: 1 }}
+        />
+        <input
+          type="text"
+          value={tech}
+          onChange={(e) => setTech(e.target.value)}
+          placeholder="tehnologii..."
+          style={{ flex: 1 }}
+        />
+        <button className="btn-primary" onClick={handleSubmit}>adauga</button>
+      </div>
 
       <div className="search-input">
         <input
