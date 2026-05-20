@@ -11,6 +11,11 @@ function ProjectList() {
     const [title, setTitle] = useState('');
     const [tech, setTech] = useState('');
   
+  // lab11 ex2: state-uri pentru editare
+      const [editingId, setEditingId] = useState(null);
+      const [editTitle, setEditTitle] = useState('');
+      const [editTech, setEditTech] = useState('');
+
   useEffect(function() {
   // INAINTE (JSON static):
     //fetch('/data/projects.json')
@@ -59,6 +64,7 @@ async function handleSubmit() {
       console.error('Eroare stergere:', err);
     }
   }
+
 //lab 11 ex 1 functie async toggle done/undone
 async function handleToggle(id, currentDone) {
     try {
@@ -74,6 +80,28 @@ async function handleToggle(id, currentDone) {
     }
   }
 
+// lab11 ex2: porneste editarea
+  function handleEdit(item) {
+    setEditingId(item._id);
+    setEditTitle(item.title);
+    setEditTech(item.tech);
+  }
+
+  // lab11 ex2: salveaza editarea
+  async function handleSave(id) {
+    try {
+      const response = await fetch('http://localhost:3000/api/projects/' + id, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: editTitle, tech: editTech }),
+      });
+      const updatedProject = await response.json();
+      setProjects(projects.map(p => p._id === id ? updatedProject : p));
+      setEditingId(null);
+    } catch (err) {
+      console.error('Eroare salvare:', err);
+    }
+  }
 
   if (loading) return <div className="section-card"><p className="state-msg">Se incarca...</p></div>;
   if (error)   return <div className="section-card"><p className="state-msg error">{error}</p></div>;
@@ -120,6 +148,27 @@ async function handleToggle(id, currentDone) {
        {filtered.length === 0
         ? <p className="state-msg">Niciun proiect gasit.</p>
         : filtered.map(function(item) {
+          // lab11 ex2: formular de editare inline
+            if (editingId === item._id) {
+              return (
+                <div key={item._id} style={{ marginBottom: '10px', padding: '12px', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-sm)', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  <input
+                    type="text"
+                    value={editTitle}
+                    onChange={(e) => setEditTitle(e.target.value)}
+                    style={{ flex: 1 }}
+                  />
+                  <input
+                    type="text"
+                    value={editTech}
+                    onChange={(e) => setEditTech(e.target.value)}
+                    style={{ flex: 1 }}
+                  />
+                  <button className="btn-primary" onClick={() => handleSave(item._id)}>salveaza</button>
+                  <button onClick={() => setEditingId(null)}>anuleaza</button>
+                </div>
+              );
+            }
             return (
               <div key={item._id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <Card
@@ -133,6 +182,15 @@ async function handleToggle(id, currentDone) {
                     style={{ fontSize: '0.75rem', padding: '4px 10px' }}
                   >
                     {item.done ? 'anuleaza' : 'finalizeaza'}
+                    
+                  </button>
+                
+                  {/* lab11 ex2: editeaza */}
+                  <button
+                    onClick={() => handleEdit(item)}
+                    style={{ fontSize: '0.75rem', padding: '4px 10px', color: '#3b82f6' }}
+                  >
+                    editeaza
                   </button>
                   {/* lab10 ex5: sterge */}
                   <button
@@ -144,6 +202,7 @@ async function handleToggle(id, currentDone) {
                 </div>
               </div>
             );
+            
           })
       }
 
