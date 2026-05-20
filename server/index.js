@@ -170,6 +170,16 @@ app.put('/api/projects/:id', async function(req, res) {
   }
 });
 
+//lab11 ex4: GET /api/stats - statistici din MongoDB
+app.get('/api/stats', async function(req, res) {
+  try {
+    const total = await Project.countDocuments();
+    const done = await Project.countDocuments({ done: true });
+    res.json({ total: total, done: done, inProgress: total - done });
+  } catch (err) {
+    res.status(500).json({ error: 'Eroare server: ' + err });
+  }
+});
 // Porneste serverul
 app.listen(PORT, function() {
   console.log('Server pornit pe http://localhost:' + PORT);
