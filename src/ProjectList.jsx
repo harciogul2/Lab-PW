@@ -54,7 +54,19 @@ async function handleSubmit() {
     }
   }
 /// lab10 ex5: sterge proiect din API si din state
-  async function handleDelete(id) {
+ /* async function handleDelete(id) {
+    try {
+      await fetch('http://localhost:3000/api/projects/' + id, {
+        method: 'DELETE',
+      });
+      setProjects(projects.filter(p => p._id !== id));
+    } catch (err) {
+      console.error('Eroare stergere:', err);
+    }
+  }*/
+  //lab11 ex3: sterge cu confirmare
+async function handleDelete(id) {
+  if (window.confirm('Sigur doriti sa stergeti acest proiect?')) {
     try {
       await fetch('http://localhost:3000/api/projects/' + id, {
         method: 'DELETE',
@@ -64,6 +76,7 @@ async function handleSubmit() {
       console.error('Eroare stergere:', err);
     }
   }
+}
 
 //lab 11 ex 1 functie async toggle done/undone
 async function handleToggle(id, currentDone) {
